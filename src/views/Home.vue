@@ -1,21 +1,26 @@
 <template>
-  <div class="home">
+  <div id="home">
     <HomeHead/>
-    <Connexion/>
-    <!-- <router-link to="/about">About</router-link> -->
+    <Login v-if="true"></Login>
+    <!-- image du fixée sur la page home -->
+    <div class="fixed-bottom"><img src="../assets/g2.png" alt="test" width="100%" z-index="-1"></div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HomeHead from '@/components/HomeHead.vue'
-import Connexion from '@/components/Connexion.vue'
+import HomeHead from "@/components/HomeHead.vue";
+import Login from "@/components/Login.vue";
+import Signin from "@/components/Signin.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     HomeHead,
-    Connexion
+     Login,
   }
-}
+};
 </script>
+
+
+

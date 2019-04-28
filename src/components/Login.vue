@@ -1,5 +1,5 @@
 <template>
-  <div class="connexion">
+  <div class="login">
     <ul>
       <li>
         <div v-if="show" class="formconnexion">
@@ -24,20 +24,16 @@
         </div>
       </li>
       <li>
-        <div v-if="alert" class="alert alert-danger " role="alert">{{ msgAlert }}</div>
+        <div v-if="alert" class="alert alert-danger" role="alert">{{ msgAlert }}</div>
       </li>
       <br>
       <li>
-        <button
-          v-on:click="login"
-          type="button"
-          class="btn btn-outline-secondary btn-login"
-        >{{ msg }}</button>
+        <button v-on:click="login" type="button" class="btn btn-primary btn-login">{{ msg }}</button>
       </li>
       <br>
       <li>
-        <button type="button" class="btn btn-outline-secondary btn-login">
-          <router-link to="/about">S'insccrire</router-link>
+        <button type="button" class="btn btn-primary btn-login" margin-bottom="200px">
+          <router-link to="/about">Sign in</router-link>
         </button>
       </li>
     </ul>
@@ -51,7 +47,7 @@ export default {
       show: false,
       alert: false,
       msgAlert: String,
-      msg: "Connexion",
+      msg: "login",
       log: "",
       input: {
         email: "",
@@ -61,6 +57,8 @@ export default {
   },
 
   methods: {
+
+    // fonction à decouper en plusieurs fonction
     login: function() {
       if (this.show == false) {
         this.show = true;
@@ -83,7 +81,6 @@ export default {
           this.msgAlert = "Email ou Mot de passe manquant";
         }
       }
-
     }
   }
 };
@@ -110,16 +107,38 @@ a {
   margin: 10px;
 }
 
-.g {
-  width: 100%;
-  height: 100px;
+.btn {
+  margin: 10px;
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 200px;
 }
 
-.navk {
-  padding: 0px;
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+  outline: 0 none;
 }
 
-.isvalid {
-  color: green;
+.btn-primary {
+  background: rgb(53, 73, 94);
+  color: #ffffff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background: rgb(53, 73, 94);
+}
+
+.btn-primary:active,
+.btn-primary.active {
+  background: #8f9900;
+  box-shadow: none;
 }
 </style>

@@ -3,18 +3,18 @@
     <router-link to="/">Retour à l'acceuil</router-link> 
     <!-- <router-link v-bind:to="'/'">Home</router-link> -->
     <h1>S'inscrire</h1>
-    <Inscription/>
+    <Signin/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Inscription from '@/components/Inscription.vue'
+import Signin from '@/components/Signin.vue'
 
 export default {
   name: 'home',
   components: {
-    Inscription
+    Signin
   }
 }
 </script>
