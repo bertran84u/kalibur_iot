@@ -1,5 +1,7 @@
 <template>
   <div class="formulaire">
+
+            <img id="plate" alt="avatar" src="@/assets/open-book.png" style="width:100px">
     <form class="needs-validation" novalidate>
       <div class="form-row">
         <div class="col-md-4 mb-3">

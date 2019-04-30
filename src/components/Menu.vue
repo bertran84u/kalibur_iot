@@ -1,47 +1,23 @@
 <template>
-  <div class="profil">
-    <!-- barre menu  -->
-    <div>
-      <b-navbar toggleable type="dark" variant="dark">
-        <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-        <b-navbar-brand>Kalibur</b-navbar-brand>
-        <b-collapse id="nav-text-collapse" is-nav>
-          <b-navbar-nav>
-            <b-nav-text>Logout</b-nav-text>
-          </b-navbar-nav>
-          <b-navbar-nav>
-            <b-nav-text>Objets connectés</b-nav-text>
-          </b-navbar-nav>
-          <b-navbar-nav>
-            <b-nav-text>Paramètres</b-nav-text>
-          </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
-
-<!-- image du perso sur la plate forme  -->
-    <div class="avatar">
-      <img id="avatar" alt="avatar" src="../assets/chevalier(2).png" style="z-index: 2">
-      <br>
-      <img id="plate" alt="avatar" src="../assets/plate.png" style="z-index: 2">
-    </div>
-
-
-    <div id="test">
-      <MasterBar/>
-    </div>
-<!-- la barre avec les 4 boutons fixée en bas de la page -->
+  <div class="menu">
     <b-navbar class="header" variant="info" fixed="bottom">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">
+        <router-link :to="{name: 'account'}">
+          <button type="button" class="btn btn-secondary" >
+          
           <img class="icone-nav-bar" alt="icone" src="../assets/profile.png">
+  
         </button>
+        </router-link>
         <button type="button" class="btn btn-secondary">
           <img class="icone-nav-bar" alt="icone" src="../assets/dash.png">
         </button>
-        <button type="button" class="btn btn-secondary">
+        <router-link :to="{name: 'chall'}">
+          <button type="button" class="btn btn-secondary" >
           <img class="icone-nav-bar" alt="icone" src="../assets/goal.png">
         </button>
+        </router-link>
+        
         <button type="button" class="btn btn-secondary" @click="lol">
           <img class="icone-nav-bar" alt="icone" src="../assets/jeu2.png">
         </button>
@@ -52,20 +28,16 @@
 
 <script>
 // @ is an alias to /src
-import MasterBar from "@/components/MasterBar.vue";
+
 
 export default {
-  name: "profil",
-  components: {
-    MasterBar
-  },
-
   data: function() {
     return {
       msglol: [
         "je ne crois pas que ta maman serait contente si elle apprenait que tu t'es battu",
         "vu tes statistique ça serait t’envoyer à l’abattoir"
-      ]
+      ],
+      show : false,
     };
   },
 
@@ -83,7 +55,8 @@ export default {
     getRandomInt(max) {
       return Math.floor(Math.random() * Math.floor(max));
     },
-
+    
+  
 
     // méthode qui affiche un message si la personne veut faire un combat ( si elle veut jouer)
     lol() {
@@ -100,6 +73,7 @@ export default {
   }
 };
 </script>
+
 
 <style scoped>
 .header {
@@ -130,6 +104,7 @@ div.avatar {
   width: 200px;
 }
 </style>
+
 
 
 

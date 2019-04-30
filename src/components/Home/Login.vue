@@ -24,17 +24,14 @@
         </div>
       </li>
       <li>
-        <div v-if="alert" class="alert alert-danger" role="alert">{{ msgAlert }}</div>
+        <b-button variant="danger" @click="user_login" class="btn btn-primary">{{ label }}</b-button>
       </li>
       <br>
+
       <li>
-        <button v-on:click="login" type="button" class="btn btn-primary btn-login">{{ msg }}</button>
-      </li>
-      <br>
-      <li>
-        <button type="button" class="btn btn-primary btn-login" margin-bottom="200px">
-          <router-link to="/about">Sign in</router-link>
-        </button>
+        <router-link :to="{name: 'about'}">
+          <button class="btn btn-primary">Sign up</button>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -45,10 +42,7 @@ export default {
   data: function() {
     return {
       show: false,
-      alert: false,
-      msgAlert: String,
-      msg: "login",
-      log: "",
+      label: "login",
       input: {
         email: "",
         password: ""
@@ -57,28 +51,39 @@ export default {
   },
 
   methods: {
-
+    makeToast(variant, msgalert) {
+      this.$bvToast.toast(msgalert, {
+        title: "Erreur de connexion",
+        variant: variant,
+        autoHideDelay: 3000,
+        solid: true
+      });
+    },
     // fonction à decouper en plusieurs fonction
-    login: function() {
-      if (this.show == false) {
+
+    user_login: function() {
+      if (this.show === false) {
         this.show = true;
-        this.msg = "Go!";
+        this.label = "Go!"
       } else {
         if (this.input.email != "" && this.input.password != "") {
-          if (this.input.email == "test" || this.input.password == "test") {
-            if (this.input.email == "test" && this.input.password == "test") {
-              this.$router.replace({ name: "profil" });
-            } else {
-              this.alert = true;
-              this.msgAlert = "Email ou Mot de passe incorrect ";
-            }
-          } else {
-            this.alert = true;
-            this.msgAlert = "Compte inconnu";
-          }
+          this.$store
+            .dispatch("user_login", {
+              email: this.input.email,
+              password: this.input.password
+            })
+            .then(response => {
+              if (response.data.authentication == 1) {
+                this.$router.push({ name: "account" });
+              } else {
+                this.makeToast("danger", "Email ou mot de passe incorrect");
+              }
+            });
         } else {
-          this.alert = true;
-          this.msgAlert = "Email ou Mot de passe manquant";
+          this.makeToast(
+            "danger",
+            "veuillez remplir tout les champs pour se connecter"
+          );
         }
       }
     }
@@ -88,57 +93,37 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 0px;
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  list-style-type: none;
+  margin-bottom: 10px;
 }
 a {
   color: #42b983;
 }
 
-.btn-home {
-  margin: 10px;
-}
-
 .btn {
-  margin: 10px;
-  padding: 14px 24px;
   border: 0 none;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   width: 200px;
+  height: 50px;
 }
 
 .btn:focus,
 .btn:active:focus,
 .btn.active:focus {
   outline: 0 none;
+  background: rgb(53, 73, 94);
 }
 
 .btn-primary {
   background: rgb(53, 73, 94);
   color: #ffffff;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background: rgb(53, 73, 94);
-}
-
-.btn-primary:active,
-.btn-primary.active {
-  background: #8f9900;
-  box-shadow: none;
 }
 </style>

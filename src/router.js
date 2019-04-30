@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+
 Vue.use(Router)
 
 export default new Router({
@@ -22,9 +23,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/profil',
-      name: 'profil',
-      component: () => import(/* webpackChunkName: "profil" */ './views/Profil.vue')
+      path: '/account',
+      name: 'account',
+      component: () => import(/* webpackChunkName: "profil" */ './views/Account.vue')
+    },
+    {
+      path: '/chall',
+      name: 'chall',
+      component: () => import(/* webpackChunkName: "profil" */ './views/Chall.vue')
     }
   ]
 })
